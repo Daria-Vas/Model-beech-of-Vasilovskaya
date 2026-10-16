@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Дарья Василовская — портфолио</title>
+    <meta name="description" content="Дарья Василовская, Курск. Портфолио модели.">
+
+    <style>
+        :root {
+            --bg: #f5f4f1;
+            --fg: #0e0e0e;
+            --muted: #6b6b6b;
+            --line: #d9d6d0;
+            --card: #ffffff;
+            --accent: #c8622b;
+            --ease: cubic-bezier(.22,.61,.36,1);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0c0c0c;
+                --fg: #f2f1ee;
+                --muted: #8a8a8a;
+                --line: #232323;
+                --card: #141414;
+                --accent: #e07a45;
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--fg);
+            font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+            height: auto
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: #fff
+        }
+
+        /* ======== ПРОГРЕСС-БАР ======== */
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 2px;
+            width: 0%;
+            background: var(--fg);
+            z-index: 1000;
+            transition: width .1s linear;
+        }
+
+        /* ======== КАСТОМНЫЙ КУРСОР ======== */
+        .cursor, .cursor-dot {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+            border-radius: 50%;
+            mix-blend-mode: difference;
+            transition: transform .25s var(--ease), width .25s var(--ease), height .25s var(--ease);
+            will-change: transform;
+        }
+
+        .cursor {
+            width: 36px;
+            height: 36px;
+            border: 1px solid #fff;
+            transform: translate(-50%,-50%);
+        }
+
+        .cursor-dot {
+            width: 5px;
+            height: 5px;
+            background: #fff;
+            transform: translate(-50%,-50%);
+        }
+
+        .cursor.hover {
+            width: 72px;
+            height: 72px;
+            background: rgba(255,255,255,.15);
+            border-color: transparent
+        }
+
+        @media (hover:none) {
+            .cursor, .cursor-dot {
+                display: none
+            }
+        }
+
+        /* ======== ШАПКА ======== */
+        .masthead {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 80px 32px 40px;
+            position: relative;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .identity-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 12px
+        }
+
+        .kicker {
+            text-transform: uppercase;
+            letter-spacing: .22em;
+            font-size: 11px;
+            color: var(--muted);
+            opacity: 0;
+            transform: translateY(10px);
+            animation: fadeUp .8s var(--ease) .1s forwards;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .author-photo {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 1px solid var(--line);
+            flex-shrink: 0;
+            opacity: 0;
+            animation: fadeUp .8s var(--ease) .2s forwards;
+            transition: transform .4s var(--ease);
+            will-change: transform;
+        }
+
+            .author-photo img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover
+            }
+
+        h1.name {
+            font-size: clamp(44px,8.5vw,110px);
+            line-height: .98;
+            font-weight: 500;
+            letter-spacing: -.035em;
+            margin: 16px 0 8px;
+        }
+
+            h1.name span {
+                display: inline-block;
+                background: linear-gradient(120deg, var(--fg) 30%, var(--accent) 50%, var(--fg) 70%);
+                background-size: 200% 100%;
+                -webkit-background-clip: text;
+                background-clip: text;
+                -webkit-text-fill-color: transparent;
+                animation: shine 6s linear infinite;
+                opacity: 0;
+                transform: translateY(30px);
+                animation: fadeUp .9s var(--ease) forwards, shine 6s linear infinite;
+            }
+
+                h1.name span:nth-child(1) {
+                    animation-delay: .3s,0s
+                }
+
+                h1.name span:nth-child(2) {
+                    animation-delay: .45s,0s
+                }
+
+        @keyframes shine {
+            to {
+                background-position: -200% 0
+            }
+        }
+
+        .location {
+            color: var(--muted);
+            font-size: 15px;
+            margin-bottom: 24px;
+            opacity: 0;
+            animation: fadeUp .8s var(--ease) .6s forwards;
+        }
+
+        .bio {
+            font-size: 14px;
+            line-height: 1.75;
+            color: var(--muted);
+            white-space: pre-line;
+            max-width: 400px;
+            opacity: 0;
+            animation: fadeUp .8s var(--ease) .75s forwards;
+        }
+
+        /* ======== НАВИГАЦИЯ ======== */
+        .nav-series {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--line);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 28px;
+            font-size: 13px;
+            position: sticky;
+            top: 0;
+            background: color-mix(in srgb, var(--bg) 85%, transparent);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 50;
+        }
+
+            .nav-series a {
+                display: inline-flex;
+                gap: 8px;
+                color: var(--muted);
+                padding: 4px 2px;
+                position: relative;
+                transition: color .3s var(--ease);
+            }
+
+                .nav-series a::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    right: 0;
+                    bottom: -2px;
+                    height: 1px;
+                    background: var(--fg);
+                    transform: scaleX(0);
+                    transform-origin: right;
+                    transition: transform .4s var(--ease);
+                }
+
+                .nav-series a:hover {
+                    color: var(--fg)
+                }
+
+                    .nav-series a:hover::after {
+                        transform: scaleX(1);
+                        transform-origin: left
+                    }
+
+            .nav-series .num {
+                font-variant-numeric: tabular-nums;
+                opacity: .6
+            }
+
+        /* ======== КОНТАКТЫ / ФУТЕР БАР ======== */
+        .topbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 28px 32px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 28px;
+            align-items: center;
+            border-bottom: 1px solid var(--line);
+            font-size: 14px;
+        }
+
+        .btn-contact {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 22px;
+            border: 1px solid var(--fg);
+            border-radius: 999px;
+            font-weight: 500;
+            background: var(--fg);
+            color: var(--bg);
+            cursor: pointer;
+            overflow: hidden;
+            transition: transform .3s var(--ease), letter-spacing .3s var(--ease);
+        }
+
+            .btn-contact:hover {
+                letter-spacing: .04em
+            }
+
+            .btn-contact::before {
+                content: '';
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                background: radial-gradient(circle at var(--mx,50%) var(--my,50%), var(--accent) 0%, transparent 60%);
+                opacity: 0;
+                transition: opacity .5s var(--ease);
+            }
+
+            .btn-contact:hover::before {
+                opacity: .35
+            }
+
+            .btn-contact span {
+                position: relative;
+                z-index: 1
+            }
+
+        .links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px 22px;
+            color: var(--muted)
+        }
+
+            .links a {
+                position: relative;
+                transition: color .3s
+            }
+
+                .links a::after {
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: -2px;
+                    height: 1px;
+                    width: 100%;
+                    background: currentColor;
+                    transform: scaleX(0);
+                    transform-origin: right;
+                    transition: transform .4s var(--ease);
+                }
+
+                .links a:hover {
+                    color: var(--fg)
+                }
+
+                    .links a:hover::after {
+                        transform: scaleX(1);
+                        transform-origin: left
+                    }
+
+        /* ======== КОНТЕНТ ======== */
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px
+        }
+
+        .series {
+            padding: 80px 0 48px;
+            border-bottom: 1px solid var(--line);
+            scroll-margin-top: 80px;
+        }
+
+            .series:last-child {
+                border-bottom: none
+            }
+
+        .series-head {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 36px;
+            flex-wrap: wrap;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .9s var(--ease), transform .9s var(--ease);
+        }
+
+        .series.in .series-head {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .series-num {
+            font-size: 12px;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            letter-spacing: .15em
+        }
+
+        .series h2 {
+            flex: 1;
+            font-size: clamp(24px,3.4vw,40px);
+            font-weight: 500;
+            letter-spacing: -.02em;
+            line-height: 1.1;
+        }
+
+        .series-count {
+            font-size: 12px;
+            color: var(--muted);
+            font-variant-numeric: tabular-nums;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+            .series-count::before {
+                content: '';
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--accent);
+                display: inline-block;
+                animation: pulse 2s ease-in-out infinite;
+            }
+
+        @keyframes pulse {
+            50% {
+                transform: scale(1.6);
+                opacity: .5
+            }
+        }
+
+        .works {
+            display: grid;
+            grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+            gap: 20px;
+        }
+
+        figure.work {
+            position: relative;
+            background: var(--card);
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(40px) scale(.96);
+            transition: opacity .9s var(--ease), transform .9s var(--ease);
+            will-change: transform,opacity;
+        }
+
+        .series.in figure.work {
+            opacity: 1;
+            transform: translateY(0) scale(1)
+        }
+
+        figure.work:nth-child(1) {
+            transition-delay: .05s
+        }
+
+        figure.work:nth-child(2) {
+            transition-delay: .12s
+        }
+
+        figure.work:nth-child(3) {
+            transition-delay: .19s
+        }
+
+        figure.work:nth-child(4) {
+            transition-delay: .26s
+        }
+
+        figure.work:nth-child(5) {
+            transition-delay: .33s
+        }
+
+        figure.work:nth-child(6) {
+            transition-delay: .40s
+        }
+
+        figure.work:nth-child(7) {
+            transition-delay: .47s
+        }
+
+        figure.work:nth-child(8) {
+            transition-delay: .54s
+        }
+
+        figure.work:nth-child(9) {
+            transition-delay: .61s
+        }
+
+        figure.work:nth-child(10) {
+            transition-delay: .68s
+        }
+
+        figure.work .image {
+            aspect-ratio: 2/3;
+            background: var(--card);
+            overflow: hidden;
+            position: relative;
+        }
+
+            figure.work .image::after {
+                content: '';
+                position: absolute;
+                inset: 0;
+                background: linear-gradient(to top, rgba(0,0,0,.55), transparent 45%);
+                opacity: 0;
+                transition: opacity .5s var(--ease);
+            }
+
+        figure.work:hover .image::after {
+            opacity: 1
+        }
+
+        figure.work img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform .9s var(--ease), filter .5s var(--ease);
+            will-change: transform;
+        }
+
+        figure.work:hover img {
+            transform: scale(1.06)
+        }
+
+        figure.work figcaption {
+            position: absolute;
+            left: 14px;
+            bottom: 12px;
+            right: 14px;
+            font-size: 12px;
+            color: #fff;
+            letter-spacing: .02em;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: transform .5s var(--ease), opacity .5s var(--ease);
+            z-index: 1;
+        }
+
+        figure.work:hover figcaption {
+            transform: translateY(0);
+            opacity: 1
+        }
+
+        /* ======== ЛАЙТБОКС ======== */
+        dialog.lightbox {
+            border: none;
+            padding: 0;
+            background: transparent;
+            max-width: 100vw;
+            max-height: 100vh;
+            width: 100vw;
+            height: 100vh;
+            opacity: 0;
+            transition: opacity .3s var(--ease);
+        }
+
+            dialog.lightbox[open] {
+                opacity: 1
+            }
+
+            dialog.lightbox::backdrop {
+                background: rgba(0,0,0,.94);
+                backdrop-filter: blur(8px)
+            }
+
+            dialog.lightbox img {
+                max-width: 92vw;
+                max-height: 88vh;
+                margin: 6vh auto;
+                object-fit: contain;
+                transform: scale(.9);
+                opacity: 0;
+                transition: transform .5s var(--ease), opacity .5s var(--ease);
+                -webkit-user-drag: none;
+                user-select: none;
+            }
+
+            dialog.lightbox[open] img {
+                transform: scale(1);
+                opacity: 1
+            }
+
+        .lb-nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.25);
+            background: rgba(255,255,255,.06);
+            color: #fff;
+            display: grid;
+            place-items: center;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            transition: background .3s, transform .3s var(--ease);
+        }
+
+            .lb-nav:hover {
+                background: rgba(255,255,255,.15);
+                transform: translateY(-50%) scale(1.1)
+            }
+
+        .lb-prev {
+            left: 24px
+        }
+
+        .lb-next {
+            right: 24px
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(255,255,255,.25);
+            background: rgba(255,255,255,.06);
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+            backdrop-filter: blur(10px);
+            transition: transform .3s var(--ease);
+        }
+
+            .lightbox-close:hover {
+                transform: rotate(90deg)
+            }
+
+        /* ======== КОНТАКТНЫЙ ДИАЛОГ ======== */
+        dialog.contact {
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            background: var(--card);
+            color: var(--fg);
+            padding: 32px;
+            max-width: 480px;
+            width: calc(100% - 32px);
+            position: relative;
+            opacity: 0;
+            transform: translateY(20px) scale(.96);
+            transition: opacity .4s var(--ease), transform .4s var(--ease);
+        }
+
+            dialog.contact[open] {
+                opacity: 1;
+                transform: translateY(0) scale(1)
+            }
+
+            dialog.contact::backdrop {
+                background: rgba(0,0,0,.6);
+                backdrop-filter: blur(6px)
+            }
+
+            dialog.contact h2 {
+                margin: 0 0 20px;
+                font-size: 19px;
+                font-weight: 500
+            }
+
+        .phone-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 18px;
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            transition: transform .3s var(--ease), border-color .3s;
+        }
+
+            .phone-link:hover {
+                transform: translateX(4px);
+                border-color: var(--fg)
+            }
+
+        dialog.contact form {
+            display: grid;
+            gap: 16px
+        }
+
+        dialog.contact label {
+            display: grid;
+            gap: 6px;
+            font-size: 13px;
+            color: var(--muted)
+        }
+
+        dialog.contact input, dialog.contact textarea {
+            font: inherit;
+            font-size: 14px;
+            padding: 12px 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--fg);
+            width: 100%;
+            transition: border-color .3s var(--ease);
+        }
+
+            dialog.contact input:focus, dialog.contact textarea:focus {
+                outline: none;
+                border-color: var(--fg);
+            }
+
+        dialog.contact textarea {
+            resize: vertical;
+            min-height: 110px
+        }
+
+        dialog.contact small {
+            color: var(--muted);
+            font-size: 11px
+        }
+
+        dialog.contact button[type="submit"] {
+            padding: 14px 20px;
+            background: var(--fg);
+            color: var(--bg);
+            border: none;
+            border-radius: 999px;
+            font: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: letter-spacing .3s var(--ease);
+        }
+
+            dialog.contact button[type="submit"]:hover {
+                letter-spacing: .05em
+            }
+
+        .honeypot {
+            position: absolute;
+            left: -9999px;
+            opacity: 0;
+            height: 0
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 18px;
+            line-height: 1;
+            transition: transform .3s var(--ease), color .3s;
+        }
+
+            .close-btn:hover {
+                transform: rotate(90deg);
+                color: var(--fg)
+            }
+
+        /* ======== АДАПТИВ ======== */
+        @media (max-width:620px) {
+            .masthead {
+                padding: 52px 20px 28px
+            }
+
+            .content, .nav-series, .topbar {
+                padding-left: 20px;
+                padding-right: 20px
+            }
+
+            .series {
+                padding: 56px 0 32px
+            }
+
+            .lb-nav {
+                width: 44px;
+                height: 44px
+            }
+
+            .lb-prev {
+                left: 10px
+            }
+
+            .lb-next {
+                right: 10px
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .cursor, .cursor-dot {
+                display: none
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="progress" id="progress"></div>
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <header class="masthead">
+        <div class="identity-top">
+            <p class="kicker">Портфолио · 2024</p>
+            <span class="author-photo no-drag" id="avatar">
+                <img src="https://vasilovskaya.nerve.ru/profile-photo-media/profile-photos/cmvaobbur003cof0k0865mhrc/derivatives/27f78428-eee1-402e-ad12-2ebf8996845a.webp" alt="">
+            </span>
+        </div>
+        <h1 class="name"><span>Дарья</span> <span>Василовская</span></h1>
+        <p class="location">Курск, Россия</p>
+        <p class="bio">
+            Height: 168 cm
+            Bust: 89 cm
+            Waist: 92 cm
+            Hips: 109 cm
+            Thigh: 67 cm
+            Biceps: 28 cm
+        </p>
+    </header>
+
+    <nav class="nav-series" aria-label="Серии работ">
+        <a href="#series-1" data-magnetic><span class="num">01</span><span>Новогодняя</span></a>
+        <a href="#series-2" data-magnetic><span class="num">02</span><span>Кокошник</span></a>
+        <a href="#series-3" data-magnetic><span class="num">03</span><span>Fashion</span></a>
+        <a href="#series-4" data-magnetic><span class="num">04</span><span>Fashion</span></a>
+        <a href="#series-5" data-magnetic><span class="num">05</span><span>Народная</span></a>
+        <a href="#series-6" data-magnetic><span class="num">06</span><span>Fashion</span></a>
+    </nav>
+
+    <div class="topbar">
+        <button class="btn-contact" id="openContact" data-magnetic><span>✉ Связаться</span></button>
+        <div class="links">
+            <a href="https://vk.ru/v_dashulka" target="_blank" rel="noopener">VK</a>
+            <a href="https://t.me/cornflower_Da" target="_blank" rel="noopener">Telegram</a>
+            <a href="tel:+79510749246">+7 951 074 92 46</a>
+        </div>
+    </div>
+
+    <main class="content">
+
+        <article class="series" id="series-1">
+            <header class="series-head"><span class="series-num">01</span><h2>Новогодняя съемка</h2><span class="series-count">6 работ</span></header>
+            <div class="works no-drag">
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/fb187887-f7a6-4035-910b-80df8e1c8daf/w1341.webp"><div class="image"><img loading="lazy" alt="IMG_7415" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/fb187887-f7a6-4035-910b-80df8e1c8daf/w640.webp"></div><figcaption>IMG_7415</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/451d0324-9fe3-44a4-8030-87223eee7883/w1334.webp"><div class="image"><img loading="lazy" alt="IMG_7414" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/451d0324-9fe3-44a4-8030-87223eee7883/w640.webp"></div><figcaption>IMG_7414</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/89ba5508-73d8-494b-b78c-d83e86204316/w1334.webp"><div class="image"><img loading="lazy" alt="IMG_7416" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/89ba5508-73d8-494b-b78c-d83e86204316/w640.webp"></div><figcaption>IMG_7416</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/9aaa0ed9-db83-497c-a55e-9bd88024921f/w1317.webp"><div class="image"><img loading="lazy" alt="IMG_7420" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/9aaa0ed9-db83-497c-a55e-9bd88024921f/w640.webp"></div><figcaption>IMG_7420</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/a0b32694-90a1-402e-8cc2-0763371dbe78/w1334.webp"><div class="image"><img loading="lazy" alt="IMG_7436" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/a0b32694-90a1-402e-8cc2-0763371dbe78/w640.webp"></div><figcaption>IMG_7436</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/44db311c-9789-4615-b0fe-4d5802f1d1c8/w1206.webp"><div class="image"><img loading="lazy" alt="IMG_7571" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/44db311c-9789-4615-b0fe-4d5802f1d1c8/w640.webp"></div><figcaption>IMG_7571</figcaption></figure>
+            </div>
+        </article>
+
+        <article class="series" id="series-2">
+            <header class="series-head"><span class="series-num">02</span><h2>Съёмка в кокошнике</h2><span class="series-count">8 работ</span></header>
+            <div class="works no-drag">
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/2b446c18-c530-4f07-b3aa-bd7b468b8abc/w1667.webp"><div class="image"><img loading="lazy" alt="IMG_0762" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/2b446c18-c530-4f07-b3aa-bd7b468b8abc/w640.webp"></div><figcaption>IMG_0762</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/c5e3a7ee-eac5-40e1-a7d2-865e2cc09add/w1667.webp"><div class="image"><img loading="lazy" alt="IMG_0763" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/c5e3a7ee-eac5-40e1-a7d2-865e2cc09add/w640.webp"></div><figcaption>IMG_0763</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/268b552c-3b95-4d24-a3af-8bf05d165bed/w1667.webp"><div class="image"><img loading="lazy" alt="IMG_0757" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/268b552c-3b95-4d24-a3af-8bf05d165bed/w640.webp"></div><figcaption>IMG_0757</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/de42ab22-20fa-4d5c-a9f4-e4be11b7519a/w1667.webp"><div class="image"><img loading="lazy" alt="IMG_0755" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/de42ab22-20fa-4d5c-a9f4-e4be11b7519a/w640.webp"></div><figcaption>IMG_0755</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/63eb9798-79d1-486c-b96d-7d121269f139/w1667.webp"><div class="image"><img loading="lazy" alt="IMG_0753" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/63eb9798-79d1-486c-b96d-7d121269f139/w640.webp"></div><figcaption>IMG_0753</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/d6128013-160e-4bcf-967d-53121d789bb5/w1667.webp"><div class="image"><img loading="lazy" alt="IMG_0761" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/d6128013-160e-4bcf-967d-53121d789bb5/w640.webp"></div><figcaption>IMG_0761</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/03b516d1-76f1-4f7f-9c3f-4a29a90def4c/w1667.webp"><div class="image"><img loading="lazy" alt="IMG_0764" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/03b516d1-76f1-4f7f-9c3f-4a29a90def4c/w640.webp"></div><figcaption>IMG_0764</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/893ad02e-d9f5-4c9d-acad-abeea7f3bffe/w1667.webp"><div class="image"><img loading="lazy" alt="IMG_0759" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/893ad02e-d9f5-4c9d-acad-abeea7f3bffe/w640.webp"></div><figcaption>IMG_0759</figcaption></figure>
+            </div>
+        </article>
+
+        <article class="series" id="series-3">
+            <header class="series-head"><span class="series-num">03</span><h2>Fashion съёмка</h2><span class="series-count">5 работ</span></header>
+            <div class="works no-drag">
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/0af69680-b81e-4348-9fa1-16ca094abc45/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3061" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/0af69680-b81e-4348-9fa1-16ca094abc45/w640.webp"></div><figcaption>IMG_3061</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/61cae192-860c-49e2-ab4a-c028068c7d87/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3076" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/61cae192-860c-49e2-ab4a-c028068c7d87/w640.webp"></div><figcaption>IMG_3076</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/2d788d8e-f2a3-4825-8be0-63bb9c5d1e1b/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3095" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/2d788d8e-f2a3-4825-8be0-63bb9c5d1e1b/w640.webp"></div><figcaption>IMG_3095</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/68610b95-5e6f-431b-a023-99edec4ddec4/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3080" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/68610b95-5e6f-431b-a023-99edec4ddec4/w640.webp"></div><figcaption>IMG_3080</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/dde56d16-f215-426e-a8ff-f013e86b94ea/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3068" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/dde56d16-f215-426e-a8ff-f013e86b94ea/w640.webp"></div><figcaption>IMG_3068</figcaption></figure>
+            </div>
+        </article>
+
+        <article class="series" id="series-4">
+            <header class="series-head"><span class="series-num">04</span><h2>Fashion съёмка</h2><span class="series-count">5 работ</span></header>
+            <div class="works no-drag">
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/60f8ffd5-0a5d-4f5a-8c32-d9aa2b2ff347/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3103" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/60f8ffd5-0a5d-4f5a-8c32-d9aa2b2ff347/w640.webp"></div><figcaption>IMG_3103</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/b88e0098-b2ef-4476-b349-214c7728b6a8/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3082" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/b88e0098-b2ef-4476-b349-214c7728b6a8/w640.webp"></div><figcaption>IMG_3082</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/d5beb8fa-229d-4924-b947-bb83ddf485da/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3108" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/d5beb8fa-229d-4924-b947-bb83ddf485da/w640.webp"></div><figcaption>IMG_3108</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/7963f0f1-4aad-4d35-81ff-c1447af34935/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3096" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/7963f0f1-4aad-4d35-81ff-c1447af34935/w640.webp"></div><figcaption>IMG_3096</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/f8346f06-83fb-4dd9-bdbf-7a859a41adcb/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_3059" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/f8346f06-83fb-4dd9-bdbf-7a859a41adcb/w640.webp"></div><figcaption>IMG_3059</figcaption></figure>
+            </div>
+        </article>
+
+        <article class="series" id="series-5">
+            <header class="series-head"><span class="series-num">05</span><h2>Русская народная съёмка</h2><span class="series-count">3 работы</span></header>
+            <div class="works no-drag">
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/cd068460-80e1-46ed-8b79-8029238bca83/w1580.webp"><div class="image"><img loading="lazy" alt="AEE7181B" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/cd068460-80e1-46ed-8b79-8029238bca83/w640.webp"></div><figcaption>AEE7181B</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/78640c13-ec16-4e0c-9f5c-a96fc48954ea/w1919.webp"><div class="image"><img loading="lazy" alt="3FFFBA8C" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/78640c13-ec16-4e0c-9f5c-a96fc48954ea/w640.webp"></div><figcaption>3FFFBA8C</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/48c1b8a5-540c-4a97-9f81-d0483a90c053/w1667.webp"><div class="image"><img loading="lazy" alt="EB77C3CD" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/48c1b8a5-540c-4a97-9f81-d0483a90c053/w640.webp"></div><figcaption>EB77C3CD</figcaption></figure>
+            </div>
+        </article>
+
+        <article class="series" id="series-6">
+            <header class="series-head"><span class="series-num">06</span><h2>Fashion съёмка</h2><span class="series-count">10 работ</span></header>
+            <div class="works no-drag">
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/101c741d-dfad-4413-9894-53329611f756/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_9834" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/101c741d-dfad-4413-9894-53329611f756/w640.webp"></div><figcaption>IMG_9834</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/765b52c0-6f99-4096-b8ef-0178695a7a38/w1553.webp"><div class="image"><img loading="lazy" alt="IMG_0014" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/765b52c0-6f99-4096-b8ef-0178695a7a38/w640.webp"></div><figcaption>IMG_0014</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/6ab22a0a-88fe-4707-be00-fd6b1933ecd3/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_9852" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/6ab22a0a-88fe-4707-be00-fd6b1933ecd3/w640.webp"></div><figcaption>IMG_9852</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/d7640bdd-33e4-41c5-9a54-ecc638131b9e/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_9855" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/d7640bdd-33e4-41c5-9a54-ecc638131b9e/w640.webp"></div><figcaption>IMG_9855</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/a9f7d721-cfa8-4be1-a58a-acb958f13555/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_0013" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/a9f7d721-cfa8-4be1-a58a-acb958f13555/w640.webp"></div><figcaption>IMG_0013</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/0cc8c6ee-c2e5-4957-a58d-b08215faac20/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_9857" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/0cc8c6ee-c2e5-4957-a58d-b08215faac20/w640.webp"></div><figcaption>IMG_9857</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/86ad0d1b-8b91-412f-bf44-5bd6ea37dfc3/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_0175" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/86ad0d1b-8b91-412f-bf44-5bd6ea37dfc3/w640.webp"></div><figcaption>IMG_0175</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/b19676f5-bd42-4bcf-9dbf-dbc8a032b9c9/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_0177" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/b19676f5-bd42-4bcf-9dbf-dbc8a032b9c9/w640.webp"></div><figcaption>IMG_0177</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/04bbc668-e67e-4c07-8222-b3ef977bd565/w2000.webp"><div class="image"><img loading="lazy" alt="IMG_0176" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/04bbc668-e67e-4c07-8222-b3ef977bd565/w640.webp"></div><figcaption>IMG_0176</figcaption></figure>
+                <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/028e27de-6fb0-4e14-9492-620b548ce3ed/w2000.webp"><div class="image"><img loading="lazy" alt="8AFA086A" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/028e27de-6fb0-4e14-9492-620b548ce3ed/w640.webp"></div><figcaption>8AFA086A</figcaption></figure>
+            </div>
+        </article>
+
+    </main>
+
+    <dialog class="lightbox" id="lightbox">
+        <button class="lightbox-close" id="closeLightbox" aria-label="Закрыть">✕</button>
+        <button class="lb-nav lb-prev" id="lbPrev" aria-label="Предыдущее">‹</button>
+        <button class="lb-nav lb-next" id="lbNext" aria-label="Следующее">›</button>
+        <img id="lightboxImg" alt="">
+    </dialog>
+
+    <dialog class="contact" id="contactDialog">
+        <button class="close-btn" id="closeContact" aria-label="Закрыть">✕</button>
+        <h2>Дарья Василовская — Связаться</h2>
+        <a class="phone-link" href="tel:+79510749246">📞 +7 951 074 92 46</a>
+        <form id="contactForm">
+            <input type="hidden" name="portfolioSlug" value="vasilovskaya">
+            <div class="honeypot" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
+            <label><span>От кого:</span><input type="text" name="sender" maxlength="500" placeholder="Email, телефон или Telegram"></label>
+            <label><span>Сообщение:</span><textarea name="message" rows="5" minlength="10" maxlength="5000" required></textarea></label>
+            <small>Отправляя, вы соглашаетесь с политикой обработки данных.</small>
+            <button type="submit">Отправить</button>
+        </form>
+    </dialog>
+
+    <script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ===== ПРОГРЕСС ===== */
+  const progress = document.getElementById('progress');
+  addEventListener('scroll', () => {
+    const h = document.documentElement.scrollHeight - innerHeight;
+    progress.style.width = (scrollY / h * 100) + '%';
+  }, { passive: true });
+
+  /* ===== КУРСОР ===== */
+  if (!reduce && matchMedia('(hover:hover)').matches) {
+    const cur = document.getElementById('cursor');
+    const dot = document.getElementById('cursorDot');
+    let mx = innerWidth/2, my = innerHeight/2, cx = mx, cy = my;
+
+    addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`; });
+
+    (function loop(){
+      cx += (mx - cx) * .18;
+      cy += (my - cy) * .18;
+      cur.style.transform = `translate(${cx}px,${cy}px) translate(-50%,-50%)`;
+      requestAnimationFrame(loop);
+    })();
+
+    document.querySelectorAll('figure.work, a, button').forEach(el => {
+      el.addEventListener('mouseenter', () => cur.classList.add('hover'));
+      el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
+    });
+  }
+
+  /* ===== ПАРАЛЛАКС АВАТАРКИ И ИМЕНИ ===== */
+  if (!reduce) {
+    const avatar = document.getElementById('avatar');
+    const name = document.querySelector('h1.name');
+    addEventListener('mousemove', e => {
+      const x = (e.clientX / innerWidth - .5) * 2;
+      const y = (e.clientY / innerHeight - .5) * 2;
+      avatar.style.transform = `translate(${x*6}px,${y*6}px)`;
+      name.style.transform  = `translate(${x*-4}px,${y*-4}px)`;
+    });
+  }
+
+  /* ===== ПОЯВЛЕНИЕ СЕКЦИЙ ===== */
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(en => {
+      if (en.isIntersecting) {
+        en.target.classList.add('in');
+        io.unobserve(en.target);
+      }
+    });
+  }, { threshold: .12 });
+  document.querySelectorAll('.series').forEach(s => io.observe(s));
+
+  /* ===== МАГНИТНЫЕ ЭЛЕМЕНТЫ ===== */
+  if (!reduce) {
+    document.querySelectorAll('[data-magnetic]').forEach(el => {
+      el.addEventListener('mousemove', e => {
+        const r = el.getBoundingClientRect();
+        const x = e.clientX - r.left - r.width / 2;
+        const y = e.clientY - r.top - r.height / 2;
+        el.style.transform = `translate(${x*.25}px,${y*.35}px)`;
+      });
+      el.addEventListener('mouseleave', () => el.style.transform = '');
+    });
+  }
+
+  /* ===== LIQUID-КНОПКА ===== */
+  const btn = document.getElementById('openContact');
+  btn.addEventListener('mousemove', e => {
+    const r = btn.getBoundingClientRect();
+    btn.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+    btn.style.setProperty('--my', (e.clientY - r.top) + 'px');
+  });
+
+  /* ===== ЛАЙТБОКС ===== */
+  const lb = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightboxImg');
+  const figs = [...document.querySelectorAll('figure.work')];
+  let idx = 0;
+
+  function open(i){
+    idx = (i + figs.length) % figs.length;
+    lbImg.src = figs[idx].dataset.full;
+    lbImg.alt = figs[idx].querySelector('img').alt;
+    if (!lb.open) lb.showModal();
+  }
+  figs.forEach((f, i) => f.addEventListener('click', () => open(i)));
+  document.getElementById('closeLightbox').onclick = () => lb.close();
+  document.getElementById('lbPrev').onclick = e => { e.stopPropagation(); open(idx - 1); };
+  document.getElementById('lbNext').onclick = e => { e.stopPropagation(); open(idx + 1); };
+  lb.addEventListener('click', e => { if (e.target === lb) lb.close(); });
+  addEventListener('keydown', e => {
+    if (!lb.open) return;
+    if (e.key === 'ArrowRight') open(idx + 1);
+    if (e.key === 'ArrowLeft')  open(idx - 1);
+    if (e.key === 'Escape')     lb.close();
+  });
+
+  /* ===== КОНТАКТ ===== */
+  const cd = document.getElementById('contactDialog');
+  document.getElementById('openContact').onclick = () => cd.showModal();
+  document.getElementById('closeContact').onclick = () => cd.close();
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Спасибо! Сообщение отправлено.');
+    cd.close();
+  });
+
+  /* ===== ЗАЩИТА ИЗОБРАЖЕНИЙ ===== */
+  document.querySelectorAll('img').forEach(img => {
+    img.addEventListener('dragstart', e => e.preventDefault());
+    img.addEventListener('contextmenu', e => e.preventDefault());
+  });
+})();
+    </script>
+</body>
+</html>
