@@ -282,45 +282,6 @@
             font-size: 14px;
         }
 
-        .btn-contact {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 12px 22px;
-            border: 1px solid var(--fg);
-            border-radius: 999px;
-            font-weight: 500;
-            background: var(--fg);
-            color: var(--bg);
-            cursor: pointer;
-            overflow: hidden;
-            transition: transform .3s var(--ease), letter-spacing .3s var(--ease);
-        }
-
-            .btn-contact:hover {
-                letter-spacing: .04em
-            }
-
-            .btn-contact::before {
-                content: '';
-                position: absolute;
-                inset: 0;
-                border-radius: inherit;
-                background: radial-gradient(circle at var(--mx,50%) var(--my,50%), var(--accent) 0%, transparent 60%);
-                opacity: 0;
-                transition: opacity .5s var(--ease);
-            }
-
-            .btn-contact:hover::before {
-                opacity: .35
-            }
-
-            .btn-contact span {
-                position: relative;
-                z-index: 1
-            }
-
         .links {
             display: flex;
             flex-wrap: wrap;
@@ -633,134 +594,6 @@
                 transform: rotate(90deg)
             }
 
-        dialog.contact {
-            border: 1px solid var(--line);
-            border-radius: 16px;
-            background: var(--card);
-            color: var(--fg);
-            padding: 32px;
-            max-width: 480px;
-            width: calc(100% - 32px);
-            position: relative;
-            opacity: 0;
-            transform: translateY(20px) scale(.96);
-            transition: opacity .4s var(--ease), transform .4s var(--ease);
-        }
-
-            dialog.contact[open] {
-                opacity: 1;
-                transform: translateY(0) scale(1)
-            }
-
-            dialog.contact::backdrop {
-                background: rgba(0,0,0,.6);
-                backdrop-filter: blur(6px)
-            }
-
-            dialog.contact h2 {
-                margin: 0 0 20px;
-                font-size: 19px;
-                font-weight: 500
-            }
-
-        .phone-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 18px;
-            background: var(--bg);
-            border: 1px solid var(--line);
-            border-radius: 10px;
-            font-weight: 500;
-            margin-bottom: 20px;
-            transition: transform .3s var(--ease), border-color .3s;
-        }
-
-            .phone-link:hover {
-                transform: translateX(4px);
-                border-color: var(--fg)
-            }
-
-        dialog.contact form {
-            display: grid;
-            gap: 16px
-        }
-
-        dialog.contact label {
-            display: grid;
-            gap: 6px;
-            font-size: 13px;
-            color: var(--muted)
-        }
-
-        dialog.contact input, dialog.contact textarea {
-            font: inherit;
-            font-size: 14px;
-            padding: 12px 14px;
-            border: 1px solid var(--line);
-            border-radius: 10px;
-            background: var(--bg);
-            color: var(--fg);
-            width: 100%;
-            transition: border-color .3s var(--ease);
-        }
-
-            dialog.contact input:focus, dialog.contact textarea:focus {
-                outline: none;
-                border-color: var(--fg);
-            }
-
-        dialog.contact textarea {
-            resize: vertical;
-            min-height: 110px
-        }
-
-        dialog.contact small {
-            color: var(--muted);
-            font-size: 11px
-        }
-
-        dialog.contact button[type="submit"] {
-            padding: 14px 20px;
-            background: var(--fg);
-            color: var(--bg);
-            border: none;
-            border-radius: 999px;
-            font: inherit;
-            font-weight: 500;
-            cursor: pointer;
-            transition: letter-spacing .3s var(--ease);
-        }
-
-            dialog.contact button[type="submit"]:hover {
-                letter-spacing: .05em
-            }
-
-        .honeypot {
-            position: absolute;
-            left: -9999px;
-            opacity: 0;
-            height: 0
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            background: none;
-            border: none;
-            color: var(--muted);
-            cursor: pointer;
-            font-size: 18px;
-            line-height: 1;
-            transition: transform .3s var(--ease), color .3s;
-        }
-
-            .close-btn:hover {
-                transform: rotate(90deg);
-                color: var(--fg)
-            }
-
         @media (max-width:620px) {
             .masthead {
                 padding: 52px 20px 28px
@@ -838,7 +671,6 @@
     </nav>
 
     <div class="topbar">
-        <button class="btn-contact" id="openContact" data-magnetic><span>✉ Связаться</span></button>
         <div class="links">
             <a href="https://vk.ru/v_dashulka" target="_blank" rel="noopener">VK</a>
             <a href="https://t.me/cornflower_Da" target="_blank" rel="noopener">Telegram</a>
@@ -877,7 +709,7 @@
 
         <!-- ======== 03. НОВОГОДНЯЯ (была 01) ======== -->
         <article class="series" id="series-3">
-            <header class="series-head"><span class="series-num">03</span><h2>Новогодняя съёмка</h2><span class="series-count">6 работ</span></header>
+            <header class="series-head"><span class="series-num">03</span><h2>Новогодняя съемка</h2><span class="series-count">6 работ</span></header>
             <div class="works no-drag">
                 <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/fb187887-f7a6-4035-910b-80df8e1c8daf/w1341.webp"><div class="image"><img loading="lazy" alt="IMG_7415" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/fb187887-f7a6-4035-910b-80df8e1c8daf/w640.webp"></div><figcaption>IMG_7415</figcaption></figure>
                 <figure class="work" data-full="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/451d0324-9fe3-44a4-8030-87223eee7883/w1334.webp"><div class="image"><img loading="lazy" alt="IMG_7414" src="https://vasilovskaya.nerve.ru/media/derivatives/cmvaobbur003cof0k0865mhrc/451d0324-9fe3-44a4-8030-87223eee7883/w640.webp"></div><figcaption>IMG_7414</figcaption></figure>
@@ -934,20 +766,6 @@
         <button class="lb-nav lb-prev" id="lbPrev" aria-label="Предыдущее">‹</button>
         <button class="lb-nav lb-next" id="lbNext" aria-label="Следующее">›</button>
         <img id="lightboxImg" alt="">
-    </dialog>
-
-    <dialog class="contact" id="contactDialog">
-        <button class="close-btn" id="closeContact" aria-label="Закрыть">✕</button>
-        <h2>Дарья Василовская — Связаться</h2>
-        <a class="phone-link" href="tel:+79510749246">📞 +7 951 074 92 46</a>
-        <form id="contactForm">
-            <input type="hidden" name="portfolioSlug" value="vasilovskaya">
-            <div class="honeypot" aria-hidden="true"><input type="text" name="website" tabindex="-1" autocomplete="off"></div>
-            <label><span>От кого:</span><input type="text" name="sender" maxlength="500" placeholder="Email, телефон или Telegram"></label>
-            <label><span>Сообщение:</span><textarea name="message" rows="5" minlength="10" maxlength="5000" required></textarea></label>
-            <small>Отправляя, вы соглашаетесь с политикой обработки данных.</small>
-            <button type="submit">Отправить</button>
-        </form>
     </dialog>
 
     <script>
@@ -1013,13 +831,6 @@
             });
           }
 
-          const btn = document.getElementById('openContact');
-          btn.addEventListener('mousemove', e => {
-            const r = btn.getBoundingClientRect();
-            btn.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-            btn.style.setProperty('--my', (e.clientY - r.top) + 'px');
-          });
-
           const lb = document.getElementById('lightbox');
           const lbImg = document.getElementById('lightboxImg');
           const figs = [...document.querySelectorAll('figure.work')];
@@ -1041,15 +852,6 @@
             if (e.key === 'ArrowRight') open(idx + 1);
             if (e.key === 'ArrowLeft')  open(idx - 1);
             if (e.key === 'Escape')     lb.close();
-          });
-
-          const cd = document.getElementById('contactDialog');
-          document.getElementById('openContact').onclick = () => cd.showModal();
-          document.getElementById('closeContact').onclick = () => cd.close();
-          document.getElementById('contactForm').addEventListener('submit', e => {
-            e.preventDefault();
-            alert('Спасибо! Сообщение отправлено.');
-            cd.close();
           });
 
           document.querySelectorAll('img').forEach(img => {
